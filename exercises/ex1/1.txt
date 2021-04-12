@@ -1,0 +1,10 @@
+in node:
+- access to the filesystem.
+- runs only with v8, not any other engines.
+- npm package management.
+- can run multiple tasks at once.
+
+in js:
+- access to the dom/browser
+- create and play with html elements
+- can run on any engine/browser.
