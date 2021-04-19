@@ -1,0 +1,29 @@
+restourants = db.restourants
+1.1. restourants.find()
+# restourants that have a cuisine:
+1.2. restourants.find({cuisine:{$exists:true}})
+#restourants that have this cuisine: 
+1.2.2. restourants.find({cuisine:"indian"})
+1.3. restourants.find({kosher:true})
+1.4. restourants.find({"address.city":{$in:["Holon","Tel aviv"]}})
+1.5. restourants.find({_id:ObjectId("607d49f93660e31ba54a3f04")}).forEach(restourant=>printjson(restourant.address))
+1.6. restourants.find({_id:ObjectId("607d49f93660e31ba54a3f04")}).forEach(restourant=>printjson(restourant.address.coordinates))
+1.7. restourants.find().sort({name:1})
+# in 1.8 the foreach is just for readability.
+1.8. restourants.find().sort({"address.city":1}).forEach(restourant=>printjson(restourant.address))
+1.9. restourants.updateOne({_id:ObjectId("607d49f93660e31ba54a3f06")},{$set:{name:"looser"}})
+1.10. restourants.updateOne({_id:ObjectId("607d49f93660e31ba54a3f06")},{$push:{reviews:{date: new Date("2021-04-19"),score:1}}})
+1.11. restourants.updateMany({},{$set:{kosher:true}})
+1.12. restourants.deleteOne({_id:ObjectId("607d49f93660e31ba54a3f06")})
+1.13. restourants.deleteMany({})
+1.14. restourants.update({_id: ObjectId("607d49f93660e31ba54a3f07")},{$inc:{"reviews.1.score":2}})
+1.15.  restourants.update({_id: ObjectId("607d49f93660e31ba54a3f07")},{$inc:{"reviews.1.score":1}})
+
+2.1. restourants.find().forEach(res=>print(res.name))
+2.2. restourants.find().forEach(res=>print(res.address.city))
+2.3. restourants.find().forEach(res=>print(res.address.coordinates))
+3.1. restourants.find({name:{$regex:/^thai/}})
+3.2. restourants.countDocuments({})
+3.3. restourants.find({'reviews.date':ISODate("2020-01-01T00:00:00Z")}).pretty()
+4.1. restourants.aggregate([{$unwind:"$reviews"},{$group:{_id:"$name",avgScore:{$avg:"$reviews.score"}}}])
+4.2. restourants.aggregate([{$match:{_id: ObjectId("607d49f93660e31ba54a3f09")}},{$unwind:"$reviews"},{$group:{_id:"$name",avgScore:{$avg:"$reviews.score"}}}])

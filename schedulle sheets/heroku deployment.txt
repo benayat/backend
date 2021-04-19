@@ -1,0 +1,21 @@
+
+about heroku:
+after installing heroku cli and login, and setting up the heroku remote: 
+
+- in packageJSON: what heroku needs is only the build script, 
+	which has to do two things: "react-scripts build && npm install".
+- in the server js file: 
+
+	if (process.env.NODE_ENV === 'production') {
+	  app.use(express.static(path.join(__dirname, './build')));
+	} else {
+	  app.use(express.static(path.join(__dirname, './public')));
+	}
+
+that just tells him where to look for the static content in both cases - dev and deploy.
+- all paths depend of course on your folder structure.
+- about the build script: im my case I have one package.json file. if you have more,
+ you'll have to use prefix to specify where the react-scripts build and npm install
+ is(npm install - for both server and client)
+ 
+ thats the short version, and it works for me. everything else is based on that.
