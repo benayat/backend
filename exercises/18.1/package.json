@@ -1,0 +1,13 @@
+{
+  "name": "18.1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node routers/router.js",
+    "dev": "nodemon routers/router.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
